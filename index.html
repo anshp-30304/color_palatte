@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Color pallate</title>
+</head>
+
+<body>
+
+    <ul class="container"></ul>
+    <div class="button">
+        <input type="text" class="value" placeholder="No of colors">
+        <button onclick="refresh_color()">Refresh</button>
+    </div>
+    <script defer>
+
+        
+        function refresh_color() {
+            const container = document.querySelector('.container');
+            let value = document.querySelector('.value').value;
+            console.log(value);
+            container.innerHTML = '';
+            for (let i = 0; i < value; i++) {
+                const lis = document.createElement("li");
+                let value1 = Math.floor(Math.random() * 255);
+                let value2 = Math.floor(Math.random() * 255);
+                let value3 = Math.floor(Math.random() * 255);
+                let color = "rgb(" + value1 + "," + value2 + "," + value3 + ")";
+
+                lis.classList.add("color");
+                lis.innerHTML = `  <div class="rect-box" style="background-color:${color};"></div>
+        <span class="text">
+           ${color}
+        </span>`;
+               lis.addEventListener("click" ,()=> copy_text(lis , color));
+                container.appendChild(lis);
+            }
+        }
+
+       const copy_text = (elem , rgb_color) =>{
+        navigator.clipboard.writeText(rgb_color);
+        }
+
+    </script>
+</body>
+
+</html>
